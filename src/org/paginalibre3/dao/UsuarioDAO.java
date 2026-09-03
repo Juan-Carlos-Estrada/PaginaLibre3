@@ -100,3 +100,14 @@ public class UsuarioDao {
                     );
                 }
             }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar usuario: " + e.getMessage());
+        }
+
+        return usuario;
+    }
+
+    public boolean actualizarUsuario(int id, String rol, boolean activo) {
+        String sql = "{call sp_actualizar_usuario(?, ?, ?)}";
+
+        try (Connection conexion = Conexion.getInstancia().conectar();
