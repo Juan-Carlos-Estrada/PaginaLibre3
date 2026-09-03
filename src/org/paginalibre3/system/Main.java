@@ -2,93 +2,39 @@ package org.paginalibre3.system;
  
 import javafx.application.Application;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Parent;
-
 import javafx.scene.Scene;
-
 import javafx.stage.Stage;
- 
+
 public class Main extends Application {
- 
-    private Stage escenarioPrincipal;
 
-    private static Main instancia;
- 
-    public Main() {
+    private static Stage escenarioPrincipal;
 
-        instancia = this;
-
-    }
- 
-    public static Main getInstancia() {
-
-        return instancia;
-
-    }
- 
     @Override
-
-    public void start(Stage primaryStage) {
-
-        this.escenarioPrincipal = primaryStage;
-
-        this.escenarioPrincipal.setTitle("Sistema de Gestión Librería - Página Viva");
-
-        mostrarInicioSesion();
-
+    public void start(Stage stage) throws Exception {
+        escenarioPrincipal = stage;
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/paginalibre3/view/InicioSesionView.fxml"));
+        Parent root = loader.load();
+        
+        Scene scene = new Scene(root);
+        escenarioPrincipal.setTitle("Pagina Libre 3");
+        escenarioPrincipal.setScene(scene);
+        escenarioPrincipal.show();
     }
- 
-    public void mostrarInicioSesion() {
 
-        cambiarEscena("/org/paginalibre3/view/InicioSesionView.fxml", "Iniciar Sesión - Página Viva");
-
+    public static void cambiarVista(String fxmlPath) throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
+        Parent root = loader.load();
+        escenarioPrincipal.setScene(new Scene(root));
     }
- 
-    public void cambiarEscena(String fxmlRuta, String titulo) {
 
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlRuta));
-
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-
-            escenarioPrincipal.setTitle(titulo);
-
-            escenarioPrincipal.setScene(scene);
-
-            escenarioPrincipal.setResizable(false);
-
-            escenarioPrincipal.show();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-
-    }
- 
-    // Método estático que tus controladores están llamando
-
-    public static void cambiarVista(String fxmlRuta) {
-
-        if (instancia != null) {
-
-            instancia.cambiarEscena(fxmlRuta, "Sistema de Gestión Librería - Página Viva");
-
-        }
-
-    }
- 
     public static void main(String[] args) {
 
         launch(args);
 
     }
-
 }
  

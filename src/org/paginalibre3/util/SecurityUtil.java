@@ -1,42 +1,35 @@
 package org.paginalibre3.util;
- 
-import java.security.MessageDigest;
- 
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest; 
+import java.security.NoSuchAlgorithmException; 
+
 public class SecurityUtil {
-
-    public static String hashSHA256(String base) {
-
+    
+    public static String hashSHA256Password(String password) {
         try {
-
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuilder hexString = new StringBuilder(2 * encodedHash.length);
 
-            StringBuilder hexString = new StringBuilder();
-
-            for (byte b : hash) {
-
+            for (byte b : encodedHash) {
                 String hex = Integer.toHexString(0xff & b);
-
-                if (hex.length() == 1) hexString.append('0');
-
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
                 hexString.append(hex);
-
             }
 
             return hexString.toString();
 
-        } catch (Exception ex) {
-
-            throw new RuntimeException(ex);
-
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error al encriptar la contraseña", e);
         }
-
     }
 
-    public static String hashSHA256Password(String password) {
+    public static String hashSHA256(String password) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }
- 

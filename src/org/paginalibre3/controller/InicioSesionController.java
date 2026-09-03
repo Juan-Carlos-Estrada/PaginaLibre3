@@ -34,9 +34,7 @@ public class InicioSesionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Instancia la clase real de tu paquete impl
-        usuarioDAO = new UsuarioDAOImpl(); 
-
+        usuarioDAO = new UsuarioDAO();
         if (lblMensaje != null) lblMensaje.setText("");
         if (lblMensajeRegistro != null) lblMensajeRegistro.setText("");
     }
@@ -88,6 +86,8 @@ public class InicioSesionController implements Initializable {
     public void handleRegistrarUsuario() {
         handleRegistrar();
     }
+
+
 
     private void abrirDashBoard(Usuario usuario) {
         String rutaFXML;
