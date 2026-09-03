@@ -12,7 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
-import org.paginalibre3.dao.UsuarioDAO;
+import org.paginalibre3.DAO.UsuarioDAO;
+import org.paginalibre3.impl.UsuarioDAOImpl;
 import org.paginalibre3.model.Usuario;
 import org.paginalibre3.util.SecurityUtil;
 
@@ -29,7 +30,9 @@ public class CambioPasswordController implements Initializable {
     @FXML
     private Label lblMensaje;
 
-    private final UsuarioDAO usuarioDao = new UsuarioDAO();
+    // Instancia correcta utilizando la implementación real
+    private final UsuarioDAO usuarioDao = new UsuarioDAOImpl();
+    
     private Usuario usuarioActual;
 
     @Override
@@ -76,9 +79,9 @@ public class CambioPasswordController implements Initializable {
     private void handleCancelar() {
         String rutaFXML;
         switch (usuarioActual.getRol()) {
-            case "bodega" -> rutaFXML = "/org/paginalibre3/view/BodegaDashboard.fxml";
-            case "cajero" -> rutaFXML = "/org/paginalibre3/view/CajeroDashboard.fxml";
-            default -> rutaFXML = "/org/paginalibre3/view/MenuPrincipalDashboard.fxml";
+            case "bodega" -> rutaFXML = "/org/paginalib3/view/BodegaDashboard.fxml";
+            case "cajero" -> rutaFXML = "/org/paginalib3/view/CajeroDashboard.fxml";
+            default -> rutaFXML = "/org/paginalib3/view/MenuPrincipalDashboard.fxml";
         }
 
         try {

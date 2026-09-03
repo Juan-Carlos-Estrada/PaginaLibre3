@@ -1,4 +1,3 @@
-/PaginaLibre3/nbproject/private/
-/PaginaLibre3/build/
-/build/
+**/nbproject/private/ **/nbproject/Makefile-.mk **/nbproject/Package-.bash build/ nbbuild/ dist/ nbdist/ .nb-gradle/ .atl/ db.properties
 /nbproject/private/
+/dist/

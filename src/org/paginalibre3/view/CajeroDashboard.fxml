@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.paginalibre3.controller.CajeroDashboardController">
+    <center>
+        <VBox alignment="CENTER" spacing="20" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="30" left="30" right="30" top="30" />
+            </padding>
+            <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="Dashboard - Caja" />
+            <Label fx:id="lblBienvenida" />
+            <Label text="(Aquí se integrará el módulo de ventas en el próximo Sprint)" />
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="15" left="30" right="30" top="15" />
+            </padding>
+            <Button onAction="#handleCambiarPassword" prefHeight="38" prefWidth="180" text="Cambiar Contraseña" />
+            <Button fx:id="btnCerrarSesion" onAction="#handleSalir" prefHeight="38" prefWidth="140" text="🚪 Cerrar Sesión" />
+        </HBox>
+    </bottom>
+</BorderPane>
