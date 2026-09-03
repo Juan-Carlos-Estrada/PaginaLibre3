@@ -1,15 +1,15 @@
-package org.paginalib3.dao;
+package org.paginalibre3.dao;
 
-import org.paginalib3.model.Usuario;
+import org.paginalibre3.model.Usuario;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.CallableStatement;
 import java.util.ArrayList;
 import java.util.List;
-import org.paginalib3.util.Conexion;
+import org.paginalibre3.util.Conexion;
 
-public class UsuarioDao {
+public class UsuarioDAO {
 
     public Usuario iniciarSesion(String username, String passwordHash) {
         Usuario usuario = null;
@@ -111,3 +111,30 @@ public class UsuarioDao {
         String sql = "{call sp_actualizar_usuario(?, ?, ?)}";
 
         try (Connection conexion = Conexion.getInstancia().conectar();
+             CallableStatement consultaCall = conexion.prepareCall(sql)) {
+
+            consultaCall.setInt(1, id);
+            consultaCall.setString(2, rol);
+            consultaCall.setBoolean(3, activo);
+
+            return consultaCall.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar usuario: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean desactivarUsuario(int id) {
+        String sql = "{call sp_desactivar_usuario(?)}";
+
+        try (Connection conexion = Conexion.getInstancia().conectar();
+             CallableStatement consultaCall = conexion.prepareCall(sql)) {
+
+            consultaCall.setInt(1, id);
+            return consultaCall.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al desactivar usuario: " + e.getMessage());
+            return false;
+        }
+    }
+}
