@@ -31,7 +31,7 @@ public class BodegaDashboardController implements Initializable, DashboardContro
     public void iniciarUsuario(Usuario usuario) {
         this.usuarioActual = usuario;
         if (lblBienvenida != null) {
-            lblBienvenida.setText("Bienvenido, " + usuario.getUsrname());
+            lblBienvenida.setText("Bienvenido, " + usuario.getUsername());
         }
     }
 

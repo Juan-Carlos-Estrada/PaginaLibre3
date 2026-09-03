@@ -15,7 +15,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.paginalibre3.dao.UsuarioDAO;
+import org.paginalibre3.DAO.UsuarioDAO;
+import org.paginalibre3.dao.impl.UsuarioDAOImpl;
 import org.paginalibre3.model.Usuario;
 import org.paginalibre3.system.Main;
 import org.paginalibre3.util.SecurityUtil;
@@ -45,7 +46,7 @@ public class UsuarioFXController implements Initializable {
     @FXML
     private TableColumn<Usuario, Boolean> colActivo;
 
-    private final UsuarioDAO usuarioDao = new UsuarioDAO();
+    private final UsuarioDAO usuarioDao = new UsuarioDAOImpl();
     private final ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
 
     @Override
@@ -59,7 +60,7 @@ public class UsuarioFXController implements Initializable {
 
     private void configurarTabla() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colUsername.setCellValueFactory(new PropertyValueFactory<>("usrname"));
+        colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colRol.setCellValueFactory(new PropertyValueFactory<>("rol"));
         colActivo.setCellValueFactory(new PropertyValueFactory<>("activo"));
     }
@@ -74,7 +75,7 @@ public class UsuarioFXController implements Initializable {
                 (obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
                         txtIdUsuario.setText(String.valueOf(newSelection.getId()));
-                        txtUsername.setText(newSelection.getUsrname());
+                        txtUsername.setText(newSelection.getUsername());
                         comboRol.setValue(newSelection.getRol());
                         chkActivo.setSelected(newSelection.isActivo());
                         txtPassword.clear();

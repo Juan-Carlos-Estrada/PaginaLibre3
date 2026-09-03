@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="607.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.paginalib3.controller.UsuariosFXController">
+<BorderPane prefHeight="607.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.paginalibre3.controller.UsuarioFXController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>

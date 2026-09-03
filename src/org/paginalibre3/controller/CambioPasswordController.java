@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import org.paginalibre3.DAO.UsuarioDAO;
-import org.paginalibre3.impl.UsuarioDAOImpl;
+import org.paginalibre3.dao.impl.UsuarioDAOImpl;
 import org.paginalibre3.model.Usuario;
 import org.paginalibre3.util.SecurityUtil;
 

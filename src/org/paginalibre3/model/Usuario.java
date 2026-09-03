@@ -3,7 +3,7 @@ package org.paginalibre3.model;
 public class Usuario {
 
     private int id;
-    private String usrname;
+    private String username;
     private String rol;
     private boolean activo;
 
@@ -12,13 +12,13 @@ public class Usuario {
 
     public Usuario(int id, String usrname, String rol) {
         this.id = id;
-        this.usrname = usrname;
+        this.username = usrname;
         this.rol = rol;
     }
 
-    public Usuario(int id, String usrname, String rol, boolean activo) {
+    public Usuario(int id, String username, String rol, boolean activo) {
         this.id = id;
-        this.usrname = usrname;
+        this.username = username;
         this.rol = rol;
         this.activo = activo;
     }
@@ -31,12 +31,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUsrname() {
-        return usrname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsrname(String usrname) {
-        this.usrname = usrname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRol() {

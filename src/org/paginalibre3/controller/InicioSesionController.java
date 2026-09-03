@@ -15,7 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.paginalibre3.DAO.UsuarioDAO;
-import org.paginalibre3.impl.UsuarioDAOImpl;
+import org.paginalibre3.dao.impl.UsuarioDAOImpl;
 import org.paginalibre3.model.Usuario;
 import org.paginalibre3.util.SecurityUtil;
 
@@ -34,15 +34,15 @@ public class InicioSesionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        usuarioDAO = new UsuarioDAO();
+        usuarioDAO = new UsuarioDAOImpl();
         if (lblMensaje != null) lblMensaje.setText("");
         if (lblMensajeRegistro != null) lblMensajeRegistro.setText("");
     }
 
     @FXML
     public void eventoInicioSesion(ActionEvent evento) {
-        String usuario = txtUsuario.getText();
-        String password = txtPassword.getText();
+        String usuario = txtUsuario.getText().trim();
+        String password = txtPassword.getText().trim();
 
         if (usuario.isEmpty() || password.isEmpty()) {
             lblMensaje.setText("Por favor, complete todos sus datos.");
@@ -50,7 +50,7 @@ public class InicioSesionController implements Initializable {
         }
 
         String passwordHash = SecurityUtil.hashSHA256Password(password);
-        Usuario usuarioIniciado = usuarioDAO.iniciarSesion(usuario, passwordHash);
+        Usuario usuarioIniciado = usuarioDAO.autenticar(usuario, passwordHash);
 
         if (usuarioIniciado != null) {
             lblMensaje.setText("Inicio correcto");
@@ -62,8 +62,8 @@ public class InicioSesionController implements Initializable {
 
     @FXML
     public void handleRegistrar() {
-        String usuario = txtNuevoUsuario.getText();
-        String password = txtNuevaPassword.getText();
+        String usuario = txtNuevoUsuario.getText().trim();
+        String password = txtNuevaPassword.getText().trim();
 
         if (usuario.isEmpty() || password.isEmpty()) {
             lblMensajeRegistro.setText("Por favor complete todos los campos.");
@@ -87,13 +87,11 @@ public class InicioSesionController implements Initializable {
         handleRegistrar();
     }
 
-
-
     private void abrirDashBoard(Usuario usuario) {
         String rutaFXML;
         String tituloDashboard;
 
-        switch (usuario.getRol()) {
+        switch (usuario.getRol().toLowerCase()) {
             case "bodega" -> {
                 rutaFXML = "/org/paginalibre3/view/BodegaDashboard.fxml";
                 tituloDashboard = "Panel de Bodega";
@@ -104,18 +102,13 @@ public class InicioSesionController implements Initializable {
             }
             default -> {
                 rutaFXML = "/org/paginalibre3/view/MenuPrincipalDashboard.fxml";
-                tituloDashboard = "Panel de Administracion";
+                tituloDashboard = "Panel de Administración";
             }
         }
 
         try {
             FXMLLoader cargadorFXML = new FXMLLoader(getClass().getResource(rutaFXML));
             Parent raiz = cargadorFXML.load();
-
-            Object controlado = cargadorFXML.getController();
-            if (controlado instanceof DashboardController dashboard) {
-                dashboard.iniciarUsuario(usuario);
-            }
 
             Stage escenario = (Stage) btnIniciarSesion.getScene().getWindow();
             escenario.setScene(new Scene(raiz));
@@ -124,7 +117,7 @@ public class InicioSesionController implements Initializable {
         } catch (IOException e) {
             System.err.println("Error al cargar la vista: " + rutaFXML + " -> " + e.getMessage());
             e.printStackTrace();
-            lblMensaje.setText("Error interno");
+            lblMensaje.setText("Error al cargar el dashboard");
         }
     }
 }
