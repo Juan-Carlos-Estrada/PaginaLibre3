@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class Conexion {
+
     private static Conexion instancia;
 
     private static final String CONFIG_FILE = "/db.properties";
