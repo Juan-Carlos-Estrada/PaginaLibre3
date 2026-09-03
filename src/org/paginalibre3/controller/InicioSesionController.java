@@ -94,15 +94,15 @@ public class InicioSesionController implements Initializable {
 
         switch (usuario.getRol()) {
             case "bodega" -> {
-                rutaFXML = "/org/paginalib3/view/BodegaDashboard.fxml";
+                rutaFXML = "/org/paginalibre3/view/BodegaDashboard.fxml";
                 tituloDashboard = "Panel de Bodega";
             }
             case "cajero" -> {
-                rutaFXML = "/org/paginalib3/view/CajeroDashboard.fxml";
+                rutaFXML = "/org/paginalibre3/view/CajeroDashboard.fxml";
                 tituloDashboard = "Panel de Caja";
             }
             default -> {
-                rutaFXML = "/org/paginalib3/view/MenuPrincipalDashboard.fxml";
+                rutaFXML = "/org/paginalibre3/view/MenuPrincipalDashboard.fxml";
                 tituloDashboard = "Panel de Administracion";
             }
         }
