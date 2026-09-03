@@ -15,7 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.paginalib3.dao.UsuarioDao;
+import org.paginalibre3.dao.UsuarioDao;
 import org.paginalibre3.model.Usuario;
 import org.paginalibre3.system.Main;
 import org.paginalibre3.util.SecurityUtil;
@@ -84,13 +84,6 @@ public class UsuariosFXController implements Initializable {
 
     @FXML
     private void handleGuardar() {
-        if (txtUsername.getText().isEmpty()
-                || txtPassword.getText().isEmpty()
-                || comboRol.getValue() == null) {
-            mostrarError("Usuario, contraseña y rol son obligatorios para crear un usuario nuevo.");
-            return;
-        }
-
         String passwordHash = SecurityUtil.hashSHA256Password(txtPassword.getText().trim());
         boolean exito = usuarioDao.registrarUsuario(
                 txtUsername.getText().trim(), passwordHash, comboRol.getValue());
@@ -106,11 +99,6 @@ public class UsuariosFXController implements Initializable {
 
     @FXML
     private void handleActualizarRol() {
-        if (txtIdUsuario.getText().isEmpty() || comboRol.getValue() == null) {
-            mostrarError("Selecciona un usuario de la tabla.");
-            return;
-        }
-
         int id = Integer.parseInt(txtIdUsuario.getText());
         boolean exito = usuarioDao.actualizarUsuario(id, comboRol.getValue(), chkActivo.isSelected());
 
@@ -125,11 +113,6 @@ public class UsuariosFXController implements Initializable {
 
     @FXML
     private void handleDesactivar() {
-        if (txtIdUsuario.getText().isEmpty()) {
-            mostrarError("Selecciona un usuario de la tabla.");
-            return;
-        }
-
         int id = Integer.parseInt(txtIdUsuario.getText());
         boolean exito = usuarioDao.desactivarUsuario(id);
 
@@ -157,7 +140,7 @@ public class UsuariosFXController implements Initializable {
     @FXML
     private void handleVolver() {
         try {
-            Main.cambiarVista("/org/paginalib3/view/MenuPrincipalDashboard.fxml");
+            Main.cambiarVista("/org/paginalibre3/view/MenuPrincipalDashboard.fxml");
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
         }
