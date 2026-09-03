@@ -137,4 +137,21 @@ public class UsuarioDAO {
             return false;
         }
     }
+
+    public boolean cambiarPassword(int id, String passwordHashActual, String passwordHashNuevo) {
+        String sql = "{call sp_cambiar_password(?, ?, ?)}";
+
+        try (Connection conexion = Conexion.getInstancia().conectar();
+             CallableStatement consultaCall = conexion.prepareCall(sql)) {
+
+            consultaCall.setInt(1, id);
+            consultaCall.setString(2, passwordHashActual);
+            consultaCall.setString(3, passwordHashNuevo);
+
+            return consultaCall.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al cambiar contraseña: " + e.getMessage());
+            return false;
+        }
+    }
 }
