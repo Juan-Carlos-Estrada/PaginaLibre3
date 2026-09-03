@@ -76,9 +76,9 @@ public class CambioPasswordController implements Initializable {
     private void handleCancelar() {
         String rutaFXML;
         switch (usuarioActual.getRol()) {
-            case "bodega" -> rutaFXML = "/org/paginalib3/view/BodegaDashboard.fxml";
-            case "cajero" -> rutaFXML = "/org/paginalib3/view/CajeroDashboard.fxml";
-            default -> rutaFXML = "/org/paginalib3/view/MenuPrincipalDashboard.fxml";
+            case "bodega" -> rutaFXML = "/org/paginalibre3/view/BodegaDashboard.fxml";
+            case "cajero" -> rutaFXML = "/org/paginalibre3/view/CajeroDashboard.fxml";
+            default -> rutaFXML = "/org/paginalibre3/view/MenuPrincipalDashboard.fxml";
         }
 
         try {
