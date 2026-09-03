@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -37,4 +39,19 @@
             <Label fx:id="lblMensaje" wrapText="true" />
         </VBox>
     </left>
+    <center>
+        <VBox spacing="10">
+            <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Lista de Usuarios" />
+            <TableView fx:id="tablaUsuarios" prefHeight="386.0" prefWidth="835.0">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="63.0" text="ID" />
+                    <TableColumn fx:id="colUsername" prefWidth="220.0" text="USUARIO" />
+                    <TableColumn fx:id="colRol" prefWidth="150.0" text="ROL" />
+                    <TableColumn fx:id="colActivo" prefWidth="120.0" text="ACTIVO" />
+                </columns>
+            </TableView>
+            <Button onAction="#handleActualizarTabla" prefHeight="25.0" prefWidth="827.0" text="Actualizar Tabla" />
+            <Button onAction="#handleVolver" prefHeight="25.0" prefWidth="858.0" text="Volver al Menú" />
+        </VBox>
+    </center>
 </BorderPane>
