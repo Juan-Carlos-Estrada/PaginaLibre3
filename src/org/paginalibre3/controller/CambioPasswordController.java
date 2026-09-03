@@ -12,7 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
-import org.paginalibre3.dao.UsuarioDao;
+import org.paginalibre3.DAO.UsuarioDAO;
+import org.paginalibre3.impl.UsuarioDAOImpl;
 import org.paginalibre3.model.Usuario;
 import org.paginalibre3.util.SecurityUtil;
 
@@ -29,7 +30,9 @@ public class CambioPasswordController implements Initializable {
     @FXML
     private Label lblMensaje;
 
-    private final UsuarioDao usuarioDao = new UsuarioDao();
+    // Instancia correcta utilizando la implementación real
+    private final UsuarioDAO usuarioDao = new UsuarioDAOImpl();
+    
     private Usuario usuarioActual;
 
     @Override

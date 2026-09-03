@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.paginalibre3.model.Usuario;
 
-public class CajeroDashboardController implements Initializable, DashboardController {
+public class BodegaDashboardController implements Initializable, DashboardController {
 
     private Usuario usuarioActual;
 
@@ -31,7 +31,7 @@ public class CajeroDashboardController implements Initializable, DashboardContro
     public void iniciarUsuario(Usuario usuario) {
         this.usuarioActual = usuario;
         if (lblBienvenida != null) {
-            lblBienvenida.setText("Bienvenido, " + usuario.getUsername());
+            lblBienvenida.setText("Bienvenido, " + usuario.getUsrname());
         }
     }
 

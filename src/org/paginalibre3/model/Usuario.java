@@ -1,57 +1,36 @@
 package org.paginalibre3.model;
-
+ 
 public class Usuario {
 
     private int id;
-    private String usrname;
+
+    private String username;
+
     private String rol;
+
     private boolean activo;
+ 
+    public Usuario() {}
+ 
+    public int getId() { return id; }
 
-    public Usuario() {
-    }
+    public void setId(int id) { this.id = id; }
 
-    public Usuario(int id, String usrname, String rol) {
-        this.id = id;
-        this.usrname = usrname;
-        this.rol = rol;
-    }
+    public String getUsername() { return username; }
 
-    public Usuario(int id, String usrname, String rol, boolean activo) {
-        this.id = id;
-        this.usrname = usrname;
-        this.rol = rol;
-        this.activo = activo;
-    }
+    public void setUsername(String username) { this.username = username; }
 
-    public int getId() {
-        return id;
-    }
+    public String getRol() { return rol; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setRol(String rol) { this.rol = rol; }
+
+    public boolean isActivo() { return activo; }
+
+    public void setActivo(boolean activo) { this.activo = activo; }
 
     public String getUsrname() {
-        return usrname;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void setUsrname(String usrname) {
-        this.usrname = usrname;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
 }
+ 

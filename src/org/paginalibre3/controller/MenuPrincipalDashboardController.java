@@ -3,6 +3,8 @@ package org.paginalibre3.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.event.ActionEvent; // Import necesario para manejar ActionEvent
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,33 +14,41 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.paginalibre3.model.Usuario;
 
-public class CajeroDashboardController implements Initializable, DashboardController {
+import org.paginalibre3.model.Usuario;
+import org.paginalibre3.system.Main; // Asegúrate de ajustar esta ruta según la ubicación real de tu clase Main
+
+public class MenuPrincipalDashboardController implements Initializable, DashboardController {
 
     private Usuario usuarioActual;
 
-    @FXML
-    private Label lblBienvenida;
-    @FXML
-    private Button btnCerrarSesion;
+    @FXML private Button btnCerrarSesion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }
+
+    }    
 
     @Override
     public void iniciarUsuario(Usuario usuario) {
         this.usuarioActual = usuario;
-        if (lblBienvenida != null) {
-            lblBienvenida.setText("Bienvenido, " + usuario.getUsername());
+    }
+
+    // --- Métodos de Navegación a Vistas / Tablas ---
+
+    @FXML
+    private void handleUsuarios(ActionEvent event) {
+        try {
+            Main.cambiarVista("/org/paginalibre3/view/UsuariosView.fxml");
+        } catch (Exception e) {
+            mostrarError("Error al cargar la vista de Usuarios: " + e.getMessage());
         }
     }
 
     @FXML
     private void handleCambiarPassword() {
         try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("/org/paginalib3/view/CambioPasswordView.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("/org/paginalibre3/view/CambioPasswordView.fxml"));
             Parent raiz = cargador.load();
 
             CambioPasswordController controlado = cargador.getController();
@@ -53,23 +63,30 @@ public class CajeroDashboardController implements Initializable, DashboardContro
         }
     }
 
+    // --- Métodos de Acción General ---
+
+    @FXML
+    private void handleNoDisponible() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Módulo no disponible");
+        alert.setHeaderText(null);
+        alert.setContentText("Este módulo no está disponible aún.");
+        alert.showAndWait();
+    }
+
     @FXML
     private void handleSalir() {
         try {
-            cambiarVista("/org/paginalib3/view/InicioSesionView.fxml", "MKAA Librería - Inicio de Sesión");
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("/org/paginalibre3/view/InicioSesionView.fxml"));
+            Parent raiz = cargador.load();
+
+            Stage escenario = (Stage) btnCerrarSesion.getScene().getWindow();
+            escenario.setScene(new Scene(raiz));
+            escenario.setTitle("MKAA Librería - Inicio de Sesión");
+            escenario.show();
         } catch (IOException e) {
             mostrarError("Error al regresar al Inicio de Sesión: " + e.getMessage());
         }
-    }
-
-    private void cambiarVista(String rutaFXML, String titulo) throws IOException {
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource(rutaFXML));
-        Parent raiz = cargador.load();
-
-        Stage escenario = (Stage) btnCerrarSesion.getScene().getWindow();
-        escenario.setScene(new Scene(raiz));
-        escenario.setTitle(titulo);
-        escenario.show();
     }
 
     private void mostrarError(String mensaje) {
